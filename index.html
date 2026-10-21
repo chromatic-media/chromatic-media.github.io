@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chromatic Media</title>
+<meta name="description" content="Free games and programs, made for the people we love.">
+<style>
+  :root {
+    --bg: #fbfaf7; --card: #ffffff; --ink: #1d1b22; --soft: #5d5866; --line: #e7e3ec;
+    --spectrum: linear-gradient(90deg, #e8453c, #f29b2b, #f2d13a, #4fb466, #3a8fd9, #7a5bd6);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #15141a; --card: #1e1d25; --ink: #f1eff5; --soft: #a9a4b3; --line: #2e2c37; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .bar { height: 6px; background: var(--spectrum); }
+  main { max-width: 960px; margin: 0 auto; padding: 56px 20px 40px; }
+  h1 { font-size: clamp(34px, 6vw, 52px); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.02em; }
+  h1 span { background: var(--spectrum); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { font-size: 19px; color: var(--soft); max-width: 640px; margin: 0 0 40px; }
+  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px;
+          text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 10px;
+          transition: transform .15s, box-shadow .15s; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+  .icon { width: 56px; height: 56px; border-radius: 12px; object-fit: contain; }
+  .glyph { width: 56px; height: 56px; border-radius: 12px; display: grid; place-items: center;
+           font-weight: 700; font-size: 26px; color: #fff; background: #3a8fd9; }
+  .card h2 { margin: 4px 0 0; font-size: 21px; }
+  .card p { margin: 0; color: var(--soft); font-size: 15.5px; }
+  .tags { font-size: 13px; color: var(--soft); margin-top: auto; padding-top: 6px; }
+  .why { margin: 48px 0 0; padding: 24px; border-left: 4px solid #7a5bd6; background: var(--card);
+         border-radius: 0 12px 12px 0; color: var(--soft); max-width: 720px; }
+  footer { max-width: 960px; margin: 0 auto; padding: 24px 20px 48px; color: var(--soft); font-size: 14px;
+           border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<div class="bar"></div>
+<main>
+  <h1><span>Chromatic</span> Media</h1>
+  <p class="lead">Free games and programs, made for the people we love. No ads, no accounts, nothing collected.</p>
+
+  <div class="grid">
+    <a class="card" href="perrys-parlor/">
+      <img class="icon" src="img/perrys-parlor.png" alt="">
+      <h2>Perry's Parlor</h2>
+      <p>Spider Solitaire in an Old West saloon. Large print, gentle, and impossible to break.</p>
+      <div class="tags">Windows · Android</div>
+    </a>
+    <a class="card" href="https://tcdeveloper27.github.io/Talanoa/">
+      <img class="icon" src="img/talanoa.png" alt="">
+      <h2>Talanoa</h2>
+      <p>A tap-to-speak talking board for people who don't use words, and the folks who care for them.</p>
+      <div class="tags">Phone web app</div>
+    </a>
+    <a class="card" href="https://tcdeveloper27.github.io/MiniPad/">
+      <div class="glyph" aria-hidden="true">M</div>
+      <h2>MiniPad</h2>
+      <p>A little space for your words: a notepad with a live formatted preview as you type.</p>
+      <div class="tags">Windows · Linux</div>
+    </a>
+  </div>
+
+  <p class="why">Chromatic Media is one person making free programs in spare hours. Many are for people with special needs
+  and the people who look after them.</p>
+</main>
+<footer>
+  <span>© 2026 Chromatic Media · Utah</span>
+  <a href="mailto:tbroussard@chromaticmedia.us">tbroussard@chromaticmedia.us</a>
+  <a href="perrys-parlor/privacy.html">Perry's Parlor privacy</a>
+</footer>
+</body>
+</html>
