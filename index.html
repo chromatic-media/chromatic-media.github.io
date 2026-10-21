@@ -11,7 +11,7 @@
     --spectrum: linear-gradient(90deg, #e8453c, #f29b2b, #f2d13a, #4fb466, #3a8fd9, #7a5bd6);
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #15141a; --card: #1e1d25; --ink: #f1eff5; --soft: #a9a4b3; --line: #2e2c37; }
+    :root:not([data-theme="light"]) { --bg: #15141a; --card: #1e1d25; --ink: #f1eff5; --soft: #a9a4b3; --line: #2e2c37; }
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--ink);
@@ -46,7 +46,7 @@
   <p class="lead">Free games and programs, made for the people we love. No ads, no accounts, nothing collected.</p>
 
   <div class="grid">
-    <a class="card" href="perrys-parlor/">
+    <a class="card" href="https://tcdeveloper27.github.io/perrys-parlor/">
       <img class="icon" src="img/perrys-parlor.png" alt="">
       <h2>Perry's Parlor</h2>
       <p>Spider Solitaire in an Old West saloon. Large print, gentle, and impossible to break.</p>
@@ -64,6 +64,12 @@
       <p>A little space for your words: a notepad with a live formatted preview as you type.</p>
       <div class="tags">Windows · Linux</div>
     </a>
+    <a class="card" href="https://tcdeveloper27.github.io/gcb-computers-play/">
+      <div class="glyph" aria-hidden="true" style="background:#4fb466">G</div>
+      <h2>GCB Computers</h2>
+      <p>A lighthearted game about life behind the counter at a computer refurb shop. Plays in your web browser.</p>
+      <div class="tags">Web browser</div>
+    </a>
   </div>
 
   <p class="why">Chromatic Media is one person making free programs in spare hours. Many are for people with special needs
@@ -72,7 +78,7 @@
 <footer>
   <span>© 2026 Chromatic Media · Utah</span>
   <a href="mailto:tbroussard@chromaticmedia.us">tbroussard@chromaticmedia.us</a>
-  <a href="perrys-parlor/privacy.html">Perry's Parlor privacy</a>
+  <a href="https://tcdeveloper27.github.io/perrys-parlor/privacy.html">Perry's Parlor privacy</a>
 </footer>
 </body>
 </html>
