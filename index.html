@@ -57,7 +57,7 @@
                filter: blur(.5px); animation: fall linear infinite; }
   @keyframes fall { to { transform: translate3d(var(--dx), 110vh, 0); opacity: .2; } }
   .hero-in { position: relative; width: 100%; max-width: 1180px; margin: 0 auto; padding: 48px 24px; }
-  .crest { width: clamp(120px, 15vw, 200px); height: auto; margin: 0 0 6px -8px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.8)); }
+  .crest { width: clamp(140px, 17vw, 230px); height: auto; margin: 0 0 8px -10px; filter: drop-shadow(0 6px 10px rgba(0,0,0,.85)) drop-shadow(0 0 22px rgba(255,70,40,.35)); }
   h1 { font: 700 clamp(40px, 7.2vw, 92px)/1.02 "Cinzel Decorative", "Cinzel", serif; margin: 0;
        background: var(--gold-text); -webkit-background-clip: text; background-clip: text; color: transparent;
        filter: drop-shadow(0 3px 2px rgba(0,0,0,.8)); }
@@ -96,10 +96,12 @@
   .sub { text-align: center; margin: 0 auto 40px; max-width: 700px; color: var(--soft); font-style: italic; font-size: 21px; }
 
   /* parchment scroll */
-  .scroll { position: relative; max-width: 860px; margin: 0 auto; padding: clamp(28px, 5vw, 56px) clamp(24px, 6vw, 72px);
-            background: #e9d9b5 url("img/parchment.jpg") center / cover; color: var(--quill);
-            font: 500 clamp(19px, 2.2vw, 23px)/1.6 "IM Fell English", "Cormorant Garamond", serif;
-            box-shadow: 0 18px 40px rgba(0,0,0,.7), inset 0 0 60px rgba(90,60,20,.25);
+  .scroll { position: relative; isolation: isolate; max-width: 860px; margin: 0 auto; padding: clamp(28px, 5vw, 56px) clamp(24px, 6vw, 72px);
+            color: var(--quill); font: 500 clamp(19px, 2.2vw, 23px)/1.6 "IM Fell English", "Cormorant Garamond", serif;
+            filter: drop-shadow(0 18px 24px rgba(0,0,0,.7)); }
+  /* the parchment itself is a layer behind the text, so its torn edge never clips the wax seal */
+  .scroll::before { content: ""; position: absolute; inset: 0; z-index: -1;
+            background: #e9d9b5 url("img/parchment.jpg") center / cover; box-shadow: inset 0 0 60px rgba(90,60,20,.25);
             clip-path: polygon(0 2%, 2% 0, 98% 1%, 100% 3%, 99% 97%, 97% 100%, 3% 99%, 0 97%); }
   .scroll h2 { color: #3b2812; text-shadow: none; text-align: left; margin-bottom: 14px; font-size: clamp(28px, 3.4vw, 38px); }
   .scroll p { margin: 0 0 1em; }
@@ -107,7 +109,7 @@
   .scroll .cap { float: left; font: 900 4.1em/0.82 "Cinzel Decorative", serif; color: var(--wax); margin: .08em .1em 0 0;
                  text-shadow: 1px 1px 0 rgba(255,240,200,.5); }
   .scroll .seal { position: absolute; right: clamp(14px, 4vw, 44px); bottom: -34px; width: clamp(84px, 10vw, 120px); height: clamp(84px, 10vw, 120px);
-                  border-radius: 50%; background: url("img/seal.jpg") center / cover; box-shadow: 0 8px 18px rgba(0,0,0,.6); transform: rotate(-8deg); }
+                  border-radius: 50%; background: url("img/seal-doom.jpg") center / cover; box-shadow: 0 8px 18px rgba(0,0,0,.6); transform: rotate(-8deg); }
 
   /* gallery of framed paintings */
   .grid { display: grid; gap: 44px 40px; grid-template-columns: repeat(auto-fit, minmax(280px, 420px)); justify-content: center; }
