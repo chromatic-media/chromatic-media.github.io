@@ -8,7 +8,7 @@
 <meta property="og:title" content="Chromatic Media">
 <meta property="og:description" content="Free games and programs, made for the ones we love.">
 <meta property="og:image" content="https://chromaticmedia.us/img/banner.jpg">
-<link rel="icon" href="img/crest-icon.png" type="image/png">
+<link rel="icon" id="favicon" href="img/crest/icon-7.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700&family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
@@ -109,7 +109,7 @@
   .scroll .cap { float: left; font: 900 4.1em/0.82 "Cinzel Decorative", serif; color: var(--wax); margin: .08em .1em 0 0;
                  text-shadow: 1px 1px 0 rgba(255,240,200,.5); }
   .scroll .seal { position: absolute; right: clamp(14px, 4vw, 44px); bottom: -34px; width: clamp(84px, 10vw, 120px); height: clamp(84px, 10vw, 120px);
-                  border-radius: 50%; background: url("img/seal-dragon.jpg") center / cover; box-shadow: 0 8px 18px rgba(0,0,0,.6); transform: rotate(-8deg); }
+                  border-radius: 50%; object-fit: cover; box-shadow: 0 8px 18px rgba(0,0,0,.6); transform: rotate(-8deg); }
 
   /* gallery of framed paintings */
   .grid { display: grid; gap: 44px 40px; grid-template-columns: repeat(auto-fit, minmax(280px, 420px)); justify-content: center; }
@@ -133,11 +133,14 @@
           background: radial-gradient(circle at 35% 35%, #d9c08a, #6b4f1f 70%, #2a1d0c); box-shadow: 0 1px 2px rgba(0,0,0,.7); }
 
   /* great-hall band (about) */
-  .hall { position: relative; background: #0e1116 url("img/hall.jpg") center / cover no-repeat; padding: 96px 0;
+  .hall { position: relative; background: #0e1116 url("img/hall.jpg") center / cover no-repeat; padding: 0 0 96px;
           border-top: 3px solid var(--gold-deep); border-bottom: 3px solid var(--gold-deep); }
   .hall::before { content: ""; position: absolute; inset: 0; background: rgba(8,10,14,.55); }
   .hall .wrap { position: relative; }
   .hall h2 { margin-bottom: 20px; }
+  .standard { display: block; width: clamp(150px, 17vw, 230px); height: auto; margin: 0 auto 18px;
+              filter: drop-shadow(0 14px 18px rgba(0,0,0,.8)); transform-origin: 50% 0; animation: sway 7s ease-in-out infinite; }
+  @keyframes sway { 0%,100% { transform: rotate(-1.4deg) } 50% { transform: rotate(1.4deg) } }
   .vows { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); max-width: 980px; margin: 36px auto 0; }
   .vow { text-align: center; padding: 26px 18px 22px; background: rgba(8,10,14,.62); border: 1px solid var(--gold-dim);
          box-shadow: inset 0 0 0 1px rgba(0,0,0,.5); position: relative; }
@@ -180,13 +183,13 @@
     .scroll .seal { bottom: -26px; }
     section { padding: 48px 0; }
   }
-  @media (prefers-reduced-motion: reduce) { .frame img { transition: none; } .snow, .torch { animation: none; } .snow span { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .frame img { transition: none; } .snow, .torch, .standard { animation: none; } .snow span { display: none; } }
 </style>
 </head>
 <body>
 <div class="bar">
   <div class="bar-in">
-    <a class="brand" href="#top"><img src="img/crest-icon.png" alt=""><span>Chromatic Media</span></a>
+    <a class="brand" href="#top"><img class="icon-pick" src="img/crest/icon-7.png" alt=""><span>Chromatic Media</span></a>
     <nav aria-label="Site">
       <a href="#games">Games</a>
       <a href="#programs">Programs</a>
@@ -200,7 +203,7 @@
   <div class="snow" aria-hidden="true"></div>
   <div class="hero-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
   <div class="hero-in">
-    <img class="crest" src="img/crest.png" alt="">
+    <img class="crest" src="img/crest/7.png" alt="Castle Doom crest" width="720" height="720">
     <h1>Chromatic Media</h1>
     <div class="rule"><span></span></div>
     <p class="tag">Games &amp; programs · for the ones we love</p>
@@ -218,7 +221,7 @@
           big clear buttons, no ads, nothing to sign up for. Everything on these pages is free to take and keep.</p>
         <p>Many of them were made for folks with special needs, and for the people who look after them. If one of them
           makes someone's day a little easier, it has done its job.</p>
-        <div class="seal" aria-hidden="true"></div>
+        <img class="seal" src="img/seal/1.jpg" alt="" aria-hidden="true" width="400" height="400">
       </div>
     </div>
   </section>
@@ -283,6 +286,7 @@
 
   <section id="hall" class="hall">
     <div class="wrap">
+      <img class="standard" src="img/banner-doom.png" alt="The black banner of Castle Doom: a red skull and crossbones beneath the castle" width="560" height="720">
       <h2>The Scriptorium</h2>
       <p class="creed">Chromatic Media is one person making free programs in spare hours, late at night, by candlelight
         more often than not. These are the vows every one of them keeps.</p>
@@ -324,7 +328,7 @@
 
 <footer>
   <div class="foot">
-    <img src="img/crest-icon.png" alt="">
+    <img class="icon-pick" src="img/crest/icon-7.png" alt="">
     <span>© 2026 Chromatic Media · Utah</span>
     <span class="sp"></span>
     <a href="mailto:support@chromaticmedia.us">support@chromaticmedia.us</a>
@@ -332,6 +336,14 @@
   </div>
 </footer>
 <script>
+  // every visit draws one of the seven Castle Doom crests and one of the four dragon seals
+  (function () {
+    var c = 1 + Math.floor(Math.random() * 7), w = 1 + Math.floor(Math.random() * 4);
+    document.querySelector('.crest').src = 'img/crest/' + c + '.png';
+    document.querySelectorAll('.icon-pick').forEach(function (i) { i.src = 'img/crest/icon-' + c + '.png'; });
+    document.getElementById('favicon').href = 'img/crest/icon-' + c + '.png';
+    document.querySelector('.scroll .seal').src = 'img/seal/' + w + '.jpg';
+  })();
   // gentle snowfall over the banner (purely decorative)
   (function () {
     var box = document.querySelector('.snow'); if (!box || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
