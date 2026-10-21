@@ -4,81 +4,137 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chromatic Media</title>
-<meta name="description" content="Free games and programs, made for the people we love.">
+<meta name="description" content="Free games and programs, made for the ones we love. No ads, no accounts, nothing collected.">
+<meta property="og:title" content="Chromatic Media">
+<meta property="og:description" content="Free games and programs, made for the ones we love.">
+<meta property="og:image" content="https://chromaticmedia.us/img/banner.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #fbfaf7; --card: #ffffff; --ink: #1d1b22; --soft: #5d5866; --line: #e7e3ec;
-    --spectrum: linear-gradient(90deg, #e8453c, #f29b2b, #f2d13a, #4fb466, #3a8fd9, #7a5bd6);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { --bg: #15141a; --card: #1e1d25; --ink: #f1eff5; --soft: #a9a4b3; --line: #2e2c37; }
+    --gold: #e2b866; --gold-deep: #a9782f; --gold-pale: #f6dfa4;
+    --ink: #eadfca; --soft: #b9ad98; --night: #0e1116;
+    --gold-text: linear-gradient(180deg, #fbe7ae 0%, #e8bd62 45%, #b27f2f 75%, #e9c071 100%);
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink);
-         font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  .bar { height: 6px; background: var(--spectrum); }
-  main { max-width: 960px; margin: 0 auto; padding: 56px 20px 40px; }
-  h1 { font-size: clamp(34px, 6vw, 52px); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.02em; }
-  h1 span { background: var(--spectrum); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .lead { font-size: 19px; color: var(--soft); max-width: 640px; margin: 0 0 40px; }
-  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px;
-          text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 10px;
-          transition: transform .15s, box-shadow .15s; }
-  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
-  .icon { width: 56px; height: 56px; border-radius: 12px; object-fit: contain; }
-  .glyph { width: 56px; height: 56px; border-radius: 12px; display: grid; place-items: center;
-           font-weight: 700; font-size: 26px; color: #fff; background: #3a8fd9; }
-  .card h2 { margin: 4px 0 0; font-size: 21px; }
-  .card p { margin: 0; color: var(--soft); font-size: 15.5px; }
-  .tags { font-size: 13px; color: var(--soft); margin-top: auto; padding-top: 6px; }
-  .why { margin: 48px 0 0; padding: 24px; border-left: 4px solid #7a5bd6; background: var(--card);
-         border-radius: 0 12px 12px 0; color: var(--soft); max-width: 720px; }
-  footer { max-width: 960px; margin: 0 auto; padding: 24px 20px 48px; color: var(--soft); font-size: 14px;
-           border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 20px; }
-  footer a { color: inherit; }
+  html { background: var(--night); }
+  body { margin: 0; color: var(--ink); background: #15171b url("img/stone.jpg") center top / 480px repeat;
+         font: 500 20px/1.55 "Cormorant Garamond", Georgia, serif;
+         min-height: 100vh; display: flex; flex-direction: column; }
+  main { flex: 1; }
+
+  /* banner */
+  .hero { position: relative; min-height: clamp(260px, 38vw, 520px); display: flex; align-items: center;
+          background: #0e1116 url("img/banner.jpg") 65% center / cover no-repeat;
+          border-bottom: 3px solid var(--gold-deep); box-shadow: 0 6px 30px rgba(0,0,0,.6); }
+  .hero::before { content: ""; position: absolute; inset: 0;
+                  background: linear-gradient(90deg, rgba(8,10,14,.82) 0%, rgba(8,10,14,.45) 42%, rgba(8,10,14,0) 70%); }
+  .hero::after { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(226,184,102,.55); pointer-events: none; }
+  .hero-in { position: relative; width: 100%; max-width: 1180px; margin: 0 auto; padding: 32px 24px; }
+  h1 { font: 700 clamp(40px, 7.4vw, 92px)/1.02 "Cinzel Decorative", "Cinzel", serif; margin: 0;
+       background: var(--gold-text); -webkit-background-clip: text; background-clip: text; color: transparent;
+       filter: drop-shadow(0 3px 2px rgba(0,0,0,.75)); }
+  .rule { display: flex; align-items: center; gap: 12px; margin: 18px 0 14px; width: min(320px, 60%); }
+  .rule::before, .rule::after { content: ""; flex: 1; height: 1px; background: var(--gold); opacity: .8; }
+  .rule span { width: 10px; height: 10px; background: var(--gold); transform: rotate(45deg); }
+  .tag { font: 500 clamp(14px, 2vw, 22px)/1.3 "Cinzel", serif; letter-spacing: .2em; text-transform: uppercase;
+         color: #efe6d4; text-shadow: 0 2px 6px rgba(0,0,0,.8); margin: 0; }
+
+  /* body */
+  main { max-width: 1180px; margin: 0 auto; padding: 56px 24px 32px; }
+  .intro { max-width: 760px; margin: 0 0 44px; }
+  h2 { font: 700 clamp(26px, 3.4vw, 36px)/1.15 "Cinzel", serif; margin: 0 0 10px; color: var(--gold-pale);
+       text-shadow: 0 2px 4px rgba(0,0,0,.7); }
+  .intro p { margin: 0; font-size: 22px; color: var(--ink); text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+
+  .grid { display: grid; gap: 30px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+  .card { display: block; text-decoration: none; color: inherit; }
+  .frame { border: 3px solid var(--gold-deep); outline: 1px solid rgba(246,223,164,.35); outline-offset: -7px;
+           background: #000; box-shadow: 0 10px 26px rgba(0,0,0,.65); aspect-ratio: 630 / 500; overflow: hidden; }
+  .frame img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s; }
+  .card:hover .frame img, .card:focus-visible .frame img { transform: scale(1.04); }
+  .card:hover .frame, .card:focus-visible .frame { border-color: var(--gold); }
+  .card h3 { font: 700 22px/1.2 "Cinzel", serif; color: var(--gold); margin: 16px 0 4px; }
+  .card p { margin: 0; font-size: 18.5px; line-height: 1.4; color: var(--ink); }
+  .card .kind { font: 500 13px/1.4 "Cinzel", serif; letter-spacing: .12em; text-transform: uppercase; color: var(--soft);
+                margin-top: 6px; }
+  .card:focus-visible { outline: 2px solid var(--gold-pale); outline-offset: 6px; }
+
+  .why { margin: 64px auto 0; max-width: 760px; text-align: center; font-style: italic; font-size: 21px;
+         color: var(--ink); text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+  .why .rule { margin: 0 auto 18px; }
+
+  footer { border-top: 1px solid rgba(226,184,102,.35); background: rgba(8,10,14,.72); }
+  .foot { max-width: 1180px; margin: 0 auto; padding: 22px 24px 30px; display: flex; flex-wrap: wrap;
+          gap: 8px 28px; font: 500 14px/1.5 "Cinzel", serif; letter-spacing: .06em; color: var(--soft); }
+  .foot a { color: var(--gold); text-decoration: none; }
+  .foot a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .hero { background-position: 72% center; }
+    .hero::before { background: linear-gradient(180deg, rgba(8,10,14,.25) 0%, rgba(8,10,14,.75) 100%); }
+    .hero-in { align-self: flex-end; padding-bottom: 28px; }
+    main { padding-top: 40px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .frame img { transition: none; } }
 </style>
 </head>
 <body>
-<div class="bar"></div>
+<header class="hero">
+  <div class="hero-in">
+    <h1>Chromatic Media</h1>
+    <div class="rule"><span></span></div>
+    <p class="tag">Games &amp; programs · for the ones we love</p>
+  </div>
+</header>
+
 <main>
-  <h1><span>Chromatic</span> Media</h1>
-  <p class="lead">Free games and programs, made for the people we love. No ads, no accounts, nothing collected.</p>
+  <section class="intro">
+    <h2>Welcome, traveler</h2>
+    <p>Small, friendly games and programs made for the people in our lives: big clear buttons, no ads, nothing to sign up for.</p>
+  </section>
 
   <div class="grid">
     <a class="card" href="https://tcdeveloper27.github.io/perrys-parlor/">
-      <img class="icon" src="img/perrys-parlor.png" alt="">
-      <h2>Perry's Parlor</h2>
-      <p>Spider Solitaire in an Old West saloon. Large print, gentle, and impossible to break.</p>
-      <div class="tags">Windows · Android</div>
+      <div class="frame"><img src="img/cover-perrys-parlor.jpg" alt="Perry's Parlor: playing cards on green felt in an Old West saloon"></div>
+      <h3>Perry's Parlor</h3>
+      <p>Spider Solitaire in an Old West saloon. Free, no ads, every hand winnable.</p>
+      <div class="kind">Card game · Windows · Android</div>
     </a>
     <a class="card" href="https://tcdeveloper27.github.io/Talanoa/">
-      <img class="icon" src="img/talanoa.png" alt="">
-      <h2>Talanoa</h2>
+      <div class="frame"><img src="img/cover-talanoa.jpg" alt="Talanoa: a grid of picture tiles like Snack, Drink and Hug"></div>
+      <h3>Talanoa</h3>
       <p>A tap-to-speak talking board for people who don't use words, and the folks who care for them.</p>
-      <div class="tags">Phone web app</div>
-    </a>
-    <a class="card" href="https://tcdeveloper27.github.io/MiniPad/">
-      <div class="glyph" aria-hidden="true">M</div>
-      <h2>MiniPad</h2>
-      <p>A little space for your words: a notepad with a live formatted preview as you type.</p>
-      <div class="tags">Windows · Linux</div>
+      <div class="kind">Talking board · Phone web app</div>
     </a>
     <a class="card" href="https://tcdeveloper27.github.io/gcb-computers-play/">
-      <div class="glyph" aria-hidden="true" style="background:#4fb466">G</div>
-      <h2>GCB Computers</h2>
-      <p>A Diner Dash-style game about the crew at GCB Computers in Layton, Utah. Plays in your web browser.</p>
-      <div class="tags">Web browser</div>
+      <div class="frame"><img src="img/cover-gcb.jpg" alt="GCB Computers: cartoon store crew and a customer at the counter"></div>
+      <h3>GCB Computers</h3>
+      <p>A Diner Dash-style game about the crew at GCB Computers in Layton, Utah.</p>
+      <div class="kind">Store-rush game · Web browser</div>
+    </a>
+    <a class="card" href="https://tcdeveloper27.github.io/MiniPad/">
+      <div class="frame"><img src="img/cover-minipad.jpg" alt="MiniPad: a dark notepad with a live formatted preview"></div>
+      <h3>MiniPad</h3>
+      <p>A little space for your words: a notepad with a live formatted preview as you type.</p>
+      <div class="kind">Notepad · Windows · Linux</div>
     </a>
   </div>
 
-  <p class="why">Chromatic Media is one person making free programs in spare hours. Many are for people with special needs
-  and the people who look after them.</p>
+  <div class="why">
+    <div class="rule"><span></span></div>
+    Chromatic Media is one person making free programs in spare hours. Many are for people with special needs
+    and the people who look after them.
+  </div>
 </main>
+
 <footer>
-  <span>© 2026 Chromatic Media · Utah</span>
-  <a href="mailto:tbroussard@chromaticmedia.us">tbroussard@chromaticmedia.us</a>
-  <a href="https://tcdeveloper27.github.io/perrys-parlor/privacy.html">Perry's Parlor privacy</a>
+  <div class="foot">
+    <span>© 2026 Chromatic Media · Utah</span>
+    <a href="mailto:tbroussard@chromaticmedia.us">tbroussard@chromaticmedia.us</a>
+    <a href="https://tcdeveloper27.github.io/perrys-parlor/privacy.html">Perry's Parlor privacy</a>
+  </div>
 </footer>
 </body>
 </html>
