@@ -121,6 +121,7 @@
   .quest { position: relative; display: block; text-decoration: none; color: var(--quill); background: #e8d7b1 url("img/parchment.jpg") center / cover;
            padding: 22px 22px 20px; box-shadow: 0 16px 30px rgba(0,0,0,.7); transform: rotate(var(--tilt, 0deg)); transition: transform .3s, box-shadow .3s;
            clip-path: polygon(1% 0, 99% 1%, 100% 98%, 0 100%); }
+  .grid > .quest:last-child:nth-child(odd):not(:only-child) { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: 420px; }   /* a lone last quest sits centred */
   .quest:hover, .quest:focus-visible { transform: rotate(0deg) translateY(-4px) scale(1.02); box-shadow: 0 22px 40px rgba(0,0,0,.8); outline: none; }
   .quest .nail { position: absolute; top: 8px; left: 50%; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%;
                  background: radial-gradient(circle at 35% 35%, #d9c08a, #6b4f1f 70%, #2a1d0c); box-shadow: 0 1px 3px rgba(0,0,0,.7); }
@@ -323,6 +324,16 @@
           <dl><dt>Realm</dt><dd>Any web browser</dd><dt>Reward</dt><dd>A busy, happy store</dd></dl>
           <div class="go">Take this quest</div>
           <img class="seal seal-pick" src="img/seal/2.jpg" alt="" width="400" height="400">
+        </a>
+        <a class="quest" href="https://chromaticmedia.itch.io/stygian-siege" style="--tilt:-0.8deg">
+          <i class="nail"></i>
+          <div class="tag">Quest · Artillery Duel</div>
+          <div class="pic"><img src="img/cover-stygian-siege.jpg" alt="Stygian Siege: a tank and a howitzer trading shells across a dusk battlefield"></div>
+          <h3>Stygian Siege</h3>
+          <p>Two squads, one island, and wind that never sits still. Read the wind sock, fire, and watch the ground blow apart. Anything knocked into the sea is gone.</p>
+          <dl><dt>Realm</dt><dd>Windows</dd><dt>Reward</dt><dd>The last tank standing</dd></dl>
+          <div class="go">Take this quest</div>
+          <img class="seal seal-pick" src="img/seal/3.jpg" alt="" width="400" height="400">
         </a>
       </div>
     </div>
