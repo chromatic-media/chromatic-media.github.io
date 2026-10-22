@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stygian Siege — turn-based artillery duels, free for Windows</title>
+<meta name="description" content="Stygian Siege: free turn-based artillery duels for Windows. Four-unit squads, wind, ground you can blow apart, and a crate full of ridiculous weapons. No ads, no accounts, nothing collected.">
+<meta property="og:title" content="Stygian Siege — turn-based artillery duels">
+<meta property="og:description" content="Two squads. One island. Whoever is left standing wins. Free for Windows.">
+<meta property="og:image" content="https://chromaticmedia.us/stygian-siege/img/cover.png">
+<meta property="og:url" content="https://chromaticmedia.us/stygian-siege/">
+<link rel="icon" href="img/flags/stygian.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#070a1c; --dusk:#1b1640; --plum:#4a1d4a; --rust:#b2443a; --orange:#ff8f45; --peach:#ffb46a; --sun:#ffd59a;
+  --ground:#0b0710; --panel:#15112e; --panel-2:#1e1842; --line:#3a2d5c; --gold:#e8b85a; --gold-2:#ffd98a;
+  --ink:#f3e9d8; --muted:#b9a9c9; --green:#7ef0a8; --red:#ff6a6a;
+  --head:"Black Ops One",Impact,sans-serif; --body:"Rajdhani","Segoe UI",sans-serif;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font:600 18px/1.5 var(--body)}
+a{color:var(--gold-2)} a:hover{color:#fff}
+img{max-width:100%;height:auto;display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.eyebrow{font:700 12px/1 var(--body);letter-spacing:.32em;text-transform:uppercase;color:var(--orange)}
+h1,h2,h3{font-family:var(--head);font-weight:400;letter-spacing:.04em;margin:0}
+h2{font-size:clamp(28px,4vw,42px);color:var(--gold-2);text-shadow:0 2px 0 #5a3a10,0 6px 18px rgba(0,0,0,.6)}
+h3{font-size:22px;color:var(--sun)}
+section{padding:72px 0}
+.says{color:var(--muted);font-size:20px;max-width:720px;margin:10px 0 0}
+.btn{display:inline-flex;align-items:center;gap:12px;font:400 20px/1 var(--head);letter-spacing:.06em;text-transform:uppercase;
+  color:#2a1500;background:linear-gradient(180deg,#ffe3a0,#e8b85a 55%,#c48f33);border:2px solid #7a5416;border-radius:12px;
+  padding:18px 28px;text-decoration:none;box-shadow:0 0 0 4px rgba(232,184,90,.18),0 10px 30px rgba(0,0,0,.55),inset 0 1px 0 #fff6d6}
+.btn:hover{filter:brightness(1.08);color:#2a1500;transform:translateY(-1px)}
+.btn .arrow{font-size:26px;line-height:0}
+.sub{font-size:15px;color:var(--muted);margin:12px 0 0}
+.sub code{font-family:ui-monospace,Consolas,monospace;font-size:14px;color:var(--ink);background:#0f0b22;padding:2px 7px;border-radius:6px;border:1px solid var(--line)}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:20;background:rgba(7,10,28,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{font:400 18px/1 var(--head);color:var(--gold-2);text-decoration:none;letter-spacing:.1em;display:flex;align-items:center;gap:10px}
+.brand small{font:600 12px/1 var(--body);letter-spacing:.2em;color:var(--muted)}
+nav a{font:700 13px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-left:22px}
+nav a:hover{color:var(--gold-2)}
+@media(max-width:760px){nav{display:none}}
+
+/* ---------- hero: the dusk battlefield ---------- */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--night) 0%,var(--dusk) 30%,var(--plum) 50%,var(--rust) 62%,var(--orange) 70%,var(--peach) 100%);min-height:620px}
+.hero svg.scene{position:absolute;inset:0;width:100%;height:100%}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:end;min-height:620px;padding-bottom:48px;padding-top:70px}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr;align-items:start}}
+.logo{font-family:var(--head);font-size:clamp(54px,9vw,112px);line-height:.9;letter-spacing:.04em;
+  background:linear-gradient(180deg,#fff2c4 0%,#ffd98a 40%,#e8b85a 58%,#9a6b1e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 3px 0 #4a2a06) drop-shadow(0 10px 24px rgba(0,0,0,.6))}
+.logo span{display:block}
+.tag{font:600 clamp(18px,2.4vw,24px)/1.35 var(--body);color:#fff4e3;text-shadow:0 2px 10px rgba(0,0,0,.6);margin:18px 0 26px;max-width:560px}
+.hero .eyebrow{color:#ffd98a;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.hero .btn{font-size:22px}
+.hero .sub{color:#fff0dd;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.hero .sub code{background:rgba(0,0,0,.45);border-color:rgba(255,255,255,.2)}
+/* the wind sock */
+.sock{justify-self:end;background:rgba(7,10,28,.55);border:1px solid rgba(255,216,138,.35);border-radius:14px;padding:16px 18px;backdrop-filter:blur(4px);width:min(100%,300px)}
+@media(max-width:860px){.sock{justify-self:start}}
+.sock .read{font:400 18px/1 var(--head);letter-spacing:.08em;color:var(--gold-2);display:flex;justify-content:space-between;align-items:center}
+.sock .read b{color:#fff;font-family:var(--body);font-weight:700;font-size:20px}
+.sock svg{width:100%;height:auto;margin-top:8px}
+.sock .cone{transform-origin:46px 36px;transition:transform .9s cubic-bezier(.3,.9,.4,1.1)}
+.sock .cone.flip{transform:scaleX(-1)}
+.sock .cone.flip .stripes{animation-duration:.5s}
+.sock .stripes{animation:flutter .8s ease-in-out infinite alternate;transform-origin:0 50%}
+.sock .pennant{animation:flutter 1.1s ease-in-out infinite alternate-reverse;transform-origin:0 50%}
+.sock .note{font-size:13px;color:var(--muted);margin:8px 0 0}
+@keyframes flutter{from{transform:skewY(-4deg) scaleY(.96)}to{transform:skewY(5deg) scaleY(1.04)}}
+/* searchlights, tracers, embers */
+.beam{transform-origin:50% 100%;animation:sweep 9s ease-in-out infinite alternate;mix-blend-mode:screen}
+.beam.b2{animation-duration:12s;animation-delay:-5s}
+@keyframes sweep{from{transform:rotate(-28deg)}to{transform:rotate(26deg)}}
+.tracer{offset-rotate:auto;animation:fly 3.6s cubic-bezier(.4,0,.6,1) infinite}
+.tracer.t1{offset-path:path("M 150 470 Q 470 120 820 455")}
+.tracer.t2{offset-path:path("M 1050 462 Q 700 90 330 470");animation-delay:-1.9s;animation-duration:4.2s}
+@keyframes fly{0%{offset-distance:0%;opacity:0}6%{opacity:1}92%{opacity:1}100%{offset-distance:100%;opacity:0}}
+.burst{transform-origin:center;animation:pop 3.6s ease-out infinite;opacity:0}
+.burst.p2{animation-duration:4.2s;animation-delay:-1.9s}
+@keyframes pop{0%,88%{opacity:0;transform:scale(.2)}92%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.6)}}
+.ember{animation:rise 7s linear infinite;opacity:0}
+.ember:nth-child(2){animation-delay:-2s;animation-duration:8s}.ember:nth-child(3){animation-delay:-4s;animation-duration:6s}.ember:nth-child(4){animation-delay:-5.5s;animation-duration:9s}.ember:nth-child(5){animation-delay:-1s;animation-duration:7.5s}
+@keyframes rise{0%{transform:translateY(0);opacity:0}10%{opacity:.9}100%{transform:translateY(-260px) translateX(30px);opacity:0}}
+@media(prefers-reduced-motion:reduce){.beam,.tracer,.burst,.ember,.sock .stripes,.sock .pennant{animation:none}.tracer,.burst{display:none}}
+
+/* ---------- trust strip ---------- */
+.trust{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.trust .wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 34px;padding:16px 20px;font:700 14px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.trust span::before{content:"◆";color:var(--orange);margin-right:10px;font-size:11px}
+
+/* ---------- steps ---------- */
+.steps{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:36px}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+.steps ol{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{position:relative;padding:0 0 22px 60px;counter-increment:s}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:linear-gradient(180deg,#ffe3a0,#c48f33);color:#2a1500;font:400 18px/40px var(--head);text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.5)}
+.steps li > b{display:block;color:var(--sun);font-size:19px}
+.steps li p{margin:4px 0 0;color:var(--muted)}
+.steps h2{font-size:34px}
+.shield{margin-top:14px;padding:14px 16px;border-left:4px solid var(--orange);background:rgba(255,143,69,.08);border-radius:0 10px 10px 0;font-size:16px;color:var(--ink)}
+
+/* ---------- field manual: unit cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:30px}
+@media(max-width:960px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.cards{grid-template-columns:1fr}}
+.card{background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:18px;position:relative;overflow:hidden}
+.card::after{content:"";position:absolute;inset:auto 0 0 0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.card .pic{height:150px;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 90%,rgba(255,143,69,.25),transparent 60%),linear-gradient(180deg,#2a1444,#15112e);border-radius:12px;border:1px solid var(--line);margin-bottom:14px}
+.card .pic img{width:72%;max-height:120px;object-fit:contain;image-rendering:auto;filter:drop-shadow(0 8px 10px rgba(0,0,0,.6))}
+.card h3{font-size:22px}
+.card .role{color:var(--orange);font:700 13px/1.3 var(--body);letter-spacing:.14em;text-transform:uppercase;margin:4px 0 10px}
+.card p{margin:0;color:var(--muted);font-size:16px}
+.card dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:12px 0 0;font-size:14px}
+.card dt{color:var(--muted);letter-spacing:.12em;text-transform:uppercase;font-size:12px;padding-top:2px}.card dd{margin:0;color:var(--ink)}
+.hp{height:8px;border-radius:4px;background:#0f0b22;border:1px solid var(--line);overflow:hidden}
+.hp i{display:block;height:100%;background:linear-gradient(90deg,#7ef0a8,#2fbf6b)}
+
+/* ---------- supply crate table ---------- */
+.crate{overflow:auto;border:1px solid var(--line);border-radius:16px;background:var(--panel);margin-top:30px}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{padding:12px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font:700 12px/1 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--orange);background:#100c25}
+td.name{font-family:var(--head);font-weight:400;letter-spacing:.06em;color:var(--sun);white-space:nowrap}
+td.rating{white-space:nowrap;letter-spacing:.1em}
+td .where{display:inline-block;font:700 11px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:4px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-top:4px}
+td .where.crate-only{border-color:#7a5416;color:var(--gold-2)}
+tr:last-child td{border-bottom:0}
+.legend{font-size:14px;color:var(--muted);margin:12px 4px 0}
+
+/* ---------- the island ---------- */
+.island{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+@media(max-width:860px){.island{grid-template-columns:1fr}}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+.tile h3{font-size:20px;margin-bottom:8px}
+.tile ul{margin:0;padding-left:18px;color:var(--muted);font-size:16px}
+.tile li{margin:4px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{font:700 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;padding:7px 10px;border-radius:999px;border:1px solid var(--line);background:#100c25;color:var(--ink)}
+.chip.easy{border-color:#2fbf6b}.chip.medium{border-color:#e8b85a}.chip.hard{border-color:#ff8f45}.chip.insane{border-color:#ff6a6a;color:#ffb0b0}
+
+/* ---------- gallery ---------- */
+.shots{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:30px}
+@media(max-width:700px){.shots{grid-template-columns:1fr}}
+.shots figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.shots figure.wide{grid-column:1/-1}
+.shots figcaption{padding:10px 14px;font-size:15px;color:var(--muted)}
+
+/* ---------- flags ---------- */
+.flags{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:14px;margin-top:30px}
+.flag{text-align:center;font:700 12px/1.2 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.flag img{width:100%;border-radius:4px;border:1px solid rgba(255,255,255,.15);box-shadow:0 6px 14px rgba(0,0,0,.5);transition:transform .2s;margin-bottom:6px;animation:wave 2.6s ease-in-out infinite}
+.flag:nth-child(3n) img{animation-delay:-.9s}.flag:nth-child(3n+1) img{animation-delay:-1.7s}
+.flag:hover img{transform:scale(1.08) rotate(-2deg)}
+@keyframes wave{0%,100%{transform:skewY(0)}50%{transform:skewY(1.6deg)}}
+@media(prefers-reduced-motion:reduce){.flag img{animation:none}}
+
+/* ---------- quartermaster FAQ ---------- */
+.qm{max-width:820px;margin:30px auto 0}
+.qm details{border-bottom:1px solid var(--line);padding:14px 0}
+.qm summary{cursor:pointer;font:700 19px/1.3 var(--body);color:var(--ink);list-style:none;display:flex;gap:12px;align-items:baseline}
+.qm summary::before{content:"▶";color:var(--orange);font-size:12px;transition:transform .2s}
+.qm details[open] summary::before{transform:rotate(90deg)}
+.qm p{margin:10px 0 0 24px;color:var(--muted)}
+.qm p b{color:var(--sun)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);background:var(--night);padding:36px 0 48px;font-size:15px;color:var(--muted)}
+footer .wrap{display:grid;grid-template-columns:1fr auto;gap:20px}
+@media(max-width:760px){footer .wrap{grid-template-columns:1fr}}
+footer p{margin:4px 0} footer b{color:var(--ink)}
+footer .links a{display:block;text-align:right}
+@media(max-width:760px){footer .links a{text-align:left}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <a class="brand" href="#top">STYGIAN SIEGE <small>· CHROMATIC MEDIA</small></a>
+  <nav aria-label="Main navigation"><a href="#start">Start here</a><a href="#manual">Field manual</a><a href="#crate">Supply crate</a><a href="#flags">Flags</a><a href="#qm">Quartermaster</a></nav>
+</div></header>
+
+<main id="top">
+<div class="hero">
+  <svg class="scene" viewBox="0 0 1200 620" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <radialGradient id="sunglow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff0d0"/><stop offset=".35" stop-color="#ffd59a"/><stop offset="1" stop-color="#ffd59a" stop-opacity="0"/></radialGradient>
+      <linearGradient id="beamg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fff2c4" stop-opacity=".55"/><stop offset="1" stop-color="#fff2c4" stop-opacity="0"/></linearGradient>
+    </defs>
+    <circle cx="760" cy="440" r="80" fill="url(#sunglow)"/>
+    <circle cx="760" cy="440" r="30" fill="#ffd59a"/><circle cx="760" cy="440" r="27" fill="#fff0d0"/>
+    <!-- far ridge -->
+    <polygon fill="#5a2a48" points="0,470 90,420 170,440 260,380 340,430 430,390 520,445 600,400 690,450 760,415 850,452 930,400 1010,440 1100,405 1200,450 1200,620 0,620"/>
+    <!-- searchlights -->
+    <polygon class="beam b1" fill="url(#beamg)" points="300,520 240,40 360,40"/>
+    <polygon class="beam b2" fill="url(#beamg)" points="900,520 840,40 960,40"/>
+    <!-- mid ridge -->
+    <polygon fill="#2c1426" points="0,520 70,490 150,505 230,470 330,500 420,465 500,505 590,470 680,510 770,480 860,512 950,478 1040,505 1120,480 1200,510 1200,620 0,620"/>
+    <!-- embers -->
+    <g fill="#ff8f45"><circle class="ember" cx="180" cy="540" r="2"/><circle class="ember" cx="420" cy="560" r="1.6"/><circle class="ember" cx="640" cy="555" r="2.2"/><circle class="ember" cx="880" cy="548" r="1.8"/><circle class="ember" cx="1040" cy="560" r="2"/></g>
+    <!-- ground -->
+    <polygon fill="#0b0710" points="0,560 120,548 260,556 400,545 540,558 700,548 860,558 1000,546 1200,556 1200,620 0,620"/>
+    <!-- tank, left -->
+    <g fill="#0b0710">
+      <path d="M118 548 l44 0 l6 -8 l-18 -9 l-28 0 z"/><rect x="112" y="548" width="58" height="10" rx="5"/>
+      <line x1="150" y1="534" x2="196" y2="504" stroke="#0b0710" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <!-- howitzer, right -->
+    <g fill="#0b0710">
+      <rect x="1030" y="546" width="54" height="12" rx="5"/><circle cx="1042" cy="558" r="7"/><circle cx="1072" cy="558" r="7"/>
+      <line x1="1050" y1="546" x2="1008" y2="500" stroke="#0b0710" stroke-width="6" stroke-linecap="round"/>
+    </g>
+    <!-- tracers + bursts -->
+    <g><circle class="tracer t1" r="3" fill="#fff6c8"/><circle class="tracer t2" r="3" fill="#fff6c8"/></g>
+    <circle class="burst p1" cx="820" cy="455" r="14" fill="#ffb46a" opacity="0"/><circle class="burst p2" cx="330" cy="470" r="14" fill="#ffb46a" opacity="0"/>
+  </svg>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">A Chromatic Media game · free for Windows</div>
+      <h1 class="logo"><span>Stygian</span><span>Siege</span></h1>
+      <p class="tag">Two squads. One island. Whoever is left standing wins. Read the wind sock, drag to aim, fire, and watch the ground blow apart.</p>
+      <a class="btn" href="https://github.com/chromatic-media/stygian-siege-downloads/releases/latest"><span class="arrow">⬇</span> Download for Windows</a>
+      <p class="sub"><code>Stygian-Siege-V3R6-Windows.exe</code> · about 85 MB · one file, nothing to install</p>
+    </div>
+    <div class="sock" aria-label="Wind readout">
+      <div class="read"><span>WIND</span><b id="windread">GUSTY · 7 →</b></div>
+      <svg viewBox="0 0 260 90" aria-hidden="true">
+        <rect x="42" y="18" width="4" height="66" rx="2" fill="#d9c7a3"/><circle cx="44" cy="16" r="5" fill="#e8b85a"/>
+        <g id="cone" class="cone">
+          <g class="stripes">
+            <polygon points="46,22 150,27 150,45 46,50" fill="#ff8f45"/>
+            <polygon points="72,23 98,24 98,48 72,49" fill="#fff0d0"/>
+            <polygon points="124,25 150,27 150,45 124,47" fill="#fff0d0"/>
+          </g>
+          <polygon class="pennant" points="150,27 216,30 196,36 216,42 150,45" fill="#ff8f45"/>
+        </g>
+        <line x1="20" y1="84" x2="240" y2="84" stroke="#3a2d5c" stroke-width="2"/>
+      </svg>
+      <p class="note">The wind changes every turn. It bends every shot: yours, and theirs.</p>
+    </div>
+  </div>
+</div>
+
+<div class="trust"><div class="wrap"><span>Free</span><span>No ads</span><span>No accounts</span><span>Nothing collected</span><span>Windows</span><span>Still in development</span></div></div>
+
+<section id="start"><div class="wrap">
+  <div class="steps">
+    <div>
+      <div class="eyebrow">Rules of engagement</div>
+      <h2>Download.<br>Open. Fire.</h2>
+      <p class="says">No installer, no account, no launcher. One file, and the battle is on. Settings are kept between builds.</p>
+      <div class="shield"><b>If Windows shows a blue box</b> that says <i>"Windows protected your PC"</i>: that only means the game isn't from a big company. Click <b>More info</b>, then <b>Run anyway</b>.</div>
+    </div>
+    <ol>
+      <li><b>Download the game</b><p>Use the gold button above. The file is called <code>Stygian-Siege-V3R6-Windows.exe</code>. The download page also has a zip with the <i>What's new</i> notes.</p></li>
+      <li><b>Open the file</b><p>Double-click it. The title screen appears: a dusk battlefield with two guns trading shells. Press <b>HOW TO PLAY</b> first if you like.</p></li>
+      <li><b>Set up a battle</b><p>Press <b>PLAY</b> for the War Room: pick a landscape, an opponent from Easy to Insane, and a flag. Then <b>START BATTLE</b>.</p></li>
+      <li><b>Aim and fire</b><p>Tap a unit, drag anywhere on the field (direction is the angle, length is the power), check the wind sock, press <b>FIRE</b>. Anything you knock into the sea is gone for good.</p></li>
+    </ol>
+  </div>
+</div></section>
+
+<section id="manual"><div class="wrap">
+  <div class="eyebrow">Field manual</div>
+  <h2>Your squad</h2>
+  <p class="says">Four units a side, lined up front to back. Every one of them can be thrown by a blast, hurt by a fall, and lost to the water. Except the one that's dug in.</p>
+  <div class="cards">
+    <article class="card">
+      <div class="pic"><img src="img/unit-tank.png" alt="The tank, drawn by the game"></div>
+      <h3>Tank</h3><div class="role">Front of the line</div>
+      <p>Fires flat or high, anywhere from 0° to 180°. Takes the first hits so the artillery behind it doesn't have to.</p>
+      <dl><dt>Armour</dt><dd><div class="hp"><i style="width:50%"></i></div></dd><dt>Hit points</dt><dd>100</dd><dt>Worth</dt><dd>250 points</dd></dl>
+    </article>
+    <article class="card">
+      <div class="pic"><img src="img/unit-howitzer.png" alt="The howitzer, drawn by the game"></div>
+      <h3>Howitzer</h3><div class="role">Reaches the furthest</div>
+      <p>The biggest barrel on the island. Lobs shells over everything, but only at 30° or steeper, so it never shoots its own tank in the back.</p>
+      <dl><dt>Armour</dt><dd><div class="hp"><i style="width:40%"></i></div></dd><dt>Hit points</dt><dd>80</dd><dt>Worth</dt><dd>250 points</dd></dl>
+    </article>
+    <article class="card">
+      <div class="pic"><img src="img/unit-mlrs.png" alt="The MLRS rocket truck, drawn by the game"></div>
+      <h3>MLRS truck</h3><div class="role">Six rockets, then a nap</div>
+      <p>Fires a six-rocket salvo that peppers a whole hillside, then sits out your next turn to reload. Worth the wait.</p>
+      <dl><dt>Armour</dt><dd><div class="hp"><i style="width:45%"></i></div></dd><dt>Hit points</dt><dd>90</dd><dt>Worth</dt><dd>300 points</dd></dl>
+    </article>
+    <article class="card">
+      <div class="pic"><img src="img/unit-bunker.png" alt="The bunker, drawn by the game"></div>
+      <h3>Bunker</h3><div class="role">Dug in at the back</div>
+      <p>Lobs three mortar rounds at a time. Never moves, not even for a nuke, and shrugs off a quarter of every direct hit. Hard to kill, and worth the most.</p>
+      <dl><dt>Armour</dt><dd><div class="hp"><i style="width:100%"></i></div></dd><dt>Hit points</dt><dd>200</dd><dt>Worth</dt><dd>400 points</dd></dl>
+    </article>
+  </div>
+</div></section>
+
+<section id="crate"><div class="wrap">
+  <div class="eyebrow">The supply crate</div>
+  <h2>Ridiculous weapons</h2>
+  <p class="says">Each side starts with a small arsenal. The rest parachutes in during the battle: land a shell next to a crate to crack it open. The enemy wants them too, and a crate that lands in the water sinks.</p>
+  <div class="crate"><table>
+    <thead><tr><th>Weapon</th><th>Mischief</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td class="name">AP shell<br><span class="where">Starting arsenal</span></td><td class="rating">💥💥💥</td><td>Armour-piercing. A direct hit with AP destroys any unit outright, bunker included. Two to start with; use them well.</td></tr>
+      <tr><td class="name">Dig shell<br><span class="where">Starting arsenal</span></td><td class="rating">💥💥</td><td>The groundbuster. Less bang, more hole. Takes the hill out from under someone and lets the slope do the rest.</td></tr>
+      <tr><td class="name">Cluster<br><span class="where">Starting arsenal</span></td><td class="rating">💥💥💥</td><td>One shell, six bomblets. Lovely for a crowd, less lovely when the wind brings them home.</td></tr>
+      <tr><td class="name">Bouncer<br><span class="where">Starting arsenal</span></td><td class="rating">💥💥💥</td><td>A grenade. It bounces until its fuse runs out, one to five seconds, your choice. Roll it into a hole they thought was safe.</td></tr>
+      <tr><td class="name">Air strike<br><span class="where">Starting arsenal</span></td><td class="rating">💥💥💥💥</td><td>Tap a spot. Five bombs fall on it. Nothing to aim, which is the whole appeal.</td></tr>
+      <tr><td class="name">Teleport<br><span class="where">Starting arsenal</span></td><td class="rating">🫥</td><td>Tap a spot and your unit is there. Out of the flood, off the cliff edge, or right behind their bunker.</td></tr>
+      <tr><td class="name">Shield<br><span class="where">Starting arsenal</span></td><td class="rating">🛡️</td><td>A layer of armour for the selected unit. Uses your turn. Pops with a satisfying noise.</td></tr>
+      <tr><td class="name">Napalm<br><span class="where crate-only">Crate only</span></td><td class="rating">💥💥💥🔥</td><td>Lands, splashes, and keeps burning. The ground remembers it for a while.</td></tr>
+      <tr><td class="name">Homing missile<br><span class="where crate-only">Crate only</span></td><td class="rating">💥💥💥💥</td><td>Finds its own way to the nearest enemy. Wind is somebody else's problem.</td></tr>
+      <tr><td class="name">Varren<br><span class="where crate-only">Crate only</span></td><td class="rating">💥💥💥💥</td><td>A four-legged runner. Drop it and it sprints at the enemy and explodes. It barks.</td></tr>
+      <tr><td class="name">Super Varren<br><span class="where crate-only">Crate only</span></td><td class="rating">💥💥💥💥💥</td><td>You steer this one in flight with A- and A+, then press BOOM wherever it hurts most.</td></tr>
+      <tr><td class="name">Medkit<br><span class="where crate-only">Crate only</span></td><td class="rating">❤️</td><td>Patches up the selected unit. Uses your turn. Unglamorous, and the reason you're still in the fight.</td></tr>
+      <tr><td class="name">CAIN nuke<br><span class="where crate-only">Crate only</span></td><td class="rating">💥💥💥💥💥💥</td><td>The biggest blast in the game, by a mile. Rare, and the island is never the same shape afterwards.</td></tr>
+      <tr><td class="name">Armageddon<br><span class="where crate-only">Crate only</span></td><td class="rating">☄️☄️☄️</td><td>Twenty-five meteors rain on the whole island. Both sides. Use it when you're losing, or when you're feeling dramatic.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="legend">Mischief is the quartermaster's own scale and is not to be taken seriously. Direct hits hurt more than splash. The bunker never moves.</p>
+</div></section>
+
+<section id="island"><div class="wrap">
+  <div class="eyebrow">The island</div>
+  <h2>Everything else that wants you dead</h2>
+  <div class="island">
+    <div class="tile"><h3>Six landscapes</h3>
+      <ul><li>Plains, desert, arctic, canyon, mountain and volcanic.</li><li>Every one of them blows apart, shell by shell.</li><li>Sea at both edges. On the canyon map the gap in the middle is water too. On the volcanic map it's lava, which is not better.</li></ul>
+      <div class="chips"><span class="chip">Plains</span><span class="chip">Desert</span><span class="chip">Arctic</span><span class="chip">Canyon</span><span class="chip">Mountain</span><span class="chip">Volcanic</span></div>
+    </div>
+    <div class="tile"><h3>Hazards &amp; neighbours</h3>
+      <ul><li><b>Oil drums</b> chain-explode. <b>Mines</b> go off when anything lands near them.</li><li>Neutral buildings sit between the squads and change the game: wreck the enemy <b>Ammo Dump</b> to take their special shells, their <b>Radar</b> to blind them to the wind, their <b>Chow Hall</b> to shake their aim. Hit the <b>Barracks</b> to repair your weakest unit.</li><li>Hit your own and the enemy gets the benefit.</li></ul>
+    </div>
+    <div class="tile"><h3>The clock &amp; the opponent</h3>
+      <ul><li><b>Sudden death:</b> after twelve rounds the water starts rising every turn. Anything it reaches is lost. Finish it.</li><li>The computer opponent learns from its misses, and reads the wind from Medium up.</li><li>Turn timer, wind mode, squad size and classic-hits rule are all yours to set.</li></ul>
+      <div class="chips"><span class="chip easy">Easy</span><span class="chip medium">Medium</span><span class="chip hard">Hard</span><span class="chip insane">Insane</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="shots"><div class="wrap">
+  <div class="eyebrow">Dispatches from the front</div>
+  <h2>A look inside</h2>
+  <div class="shots">
+    <figure class="wide"><img src="img/screenshot-1-title.jpg" alt="The title screen: a dusk battlefield with tracer shells"><figcaption>The front door. A tank and a howitzer trading shells across a dusk battlefield.</figcaption></figure>
+    <figure><img src="img/screenshot-2-menu.jpg" alt="The War Room: maps, opponent, flags and options"><figcaption>The War Room: pick a landscape, an opponent and a flag.</figcaption></figure>
+    <figure><img src="img/screenshot-5-knockback.jpg" alt="An explosion throws a unit into the air"><figcaption>Every blast digs in and throws units around.</figcaption></figure>
+    <figure><img src="img/screenshot-4-weapon-armageddon.jpg" alt="Armageddon: a meteor shower over the island"><figcaption>Armageddon, fresh from a supply crate.</figcaption></figure>
+    <figure><img src="img/screenshot-3-sudden-death.jpg" alt="Sudden death: the water rises"><figcaption>Sudden death. The water is rising, and it isn't picky.</figcaption></figure>
+    <figure><img src="img/screenshot-7-biome-volcanic.jpg" alt="The volcanic landscape"><figcaption>The volcanic map. The sea here is lava.</figcaption></figure>
+    <figure><img src="img/screenshot-6-victory.jpg" alt="The victory show"><figcaption>The victory show. Defeat is fire and brimstone.</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="flags"><div class="wrap">
+  <div class="eyebrow">Hall of flags</div>
+  <h2>Fly your colours</h2>
+  <p class="says">Twenty-four flags for you and your opponent, from the stars and stripes to the skull and crossbones. They flutter with the wind in battle, so they're also a tell.</p>
+  <div class="flags">
+    <div class="flag"><img src="img/flags/usa.png" alt="USA">USA</div>
+    <div class="flag"><img src="img/flags/uk.png" alt="United Kingdom">UK</div>
+    <div class="flag"><img src="img/flags/canada.png" alt="Canada">Canada</div>
+    <div class="flag"><img src="img/flags/mexico.png" alt="Mexico">Mexico</div>
+    <div class="flag"><img src="img/flags/germany.png" alt="Germany">Germany</div>
+    <div class="flag"><img src="img/flags/france.png" alt="France">France</div>
+    <div class="flag"><img src="img/flags/italy.png" alt="Italy">Italy</div>
+    <div class="flag"><img src="img/flags/spain.png" alt="Spain">Spain</div>
+    <div class="flag"><img src="img/flags/japan.png" alt="Japan">Japan</div>
+    <div class="flag"><img src="img/flags/brazil.png" alt="Brazil">Brazil</div>
+    <div class="flag"><img src="img/flags/australia.png" alt="Australia">Australia</div>
+    <div class="flag"><img src="img/flags/sweden.png" alt="Sweden">Sweden</div>
+    <div class="flag"><img src="img/flags/norway.png" alt="Norway">Norway</div>
+    <div class="flag"><img src="img/flags/finland.png" alt="Finland">Finland</div>
+    <div class="flag"><img src="img/flags/ireland.png" alt="Ireland">Ireland</div>
+    <div class="flag"><img src="img/flags/netherlands.png" alt="Netherlands">Netherlands</div>
+    <div class="flag"><img src="img/flags/switzerland.png" alt="Switzerland">Switzerland</div>
+    <div class="flag"><img src="img/flags/ukraine.png" alt="Ukraine">Ukraine</div>
+    <div class="flag"><img src="img/flags/poland.png" alt="Poland">Poland</div>
+    <div class="flag"><img src="img/flags/korea.png" alt="Korea">Korea</div>
+    <div class="flag"><img src="img/flags/scotland.png" alt="Scotland">Scotland</div>
+    <div class="flag"><img src="img/flags/pirate.png" alt="Pirate">Pirate</div>
+    <div class="flag"><img src="img/flags/racing.png" alt="Racing">Racing</div>
+    <div class="flag"><img src="img/flags/stygian.png" alt="Stygian">Stygian</div>
+  </div>
+</div></section>
+
+<section id="qm"><div class="wrap">
+  <div class="eyebrow">Ask the quartermaster</div>
+  <h2>Questions from the ranks</h2>
+  <div class="qm">
+    <details><summary>Windows says it "protected my PC". Did I download something bad?</summary><p>No. That blue box turns up for any program that isn't signed by a big company, and we're a small one. Click <b>More info</b>, then <b>Run anyway</b>. If you'd like to check the file first, its SHA-256 fingerprint is on the download page.</p></details>
+    <details><summary>Is it really free? What's the catch?</summary><p>Free, no ads, no account, nothing collected, nothing phones home. The catch is that the quartermaster will not help you aim.</p></details>
+    <details><summary>Is there an Android or Mac version?</summary><p>Windows only for now. An Android version is on the list, along with two players on one screen and a training range. <b>Mac:</b> not planned, no Mac here to test on.</p></details>
+    <details><summary>What does "still in development" mean?</summary><p>The game is complete and playable from the title screen to the victory show, and every build is put through hundreds of automated battles before it ships. It means more is coming, and that a rough edge here and there is possible. Tell us about those at <a href="mailto:support@chromaticmedia.us">support@chromaticmedia.us</a>.</p></details>
+    <details><summary>How do I aim? My shots keep going into the sea.</summary><p>Drag anywhere on the battlefield: the direction sets the barrel angle, the length sets the power. Nothing fires until you press <b>FIRE</b>. Then read the wind sock at the top: wind bends every shot. <b>A-</b>, <b>A+</b>, <b>P-</b> and <b>P+</b> nudge your aim by one. Easy opponents miss a lot too; it evens out.</p></details>
+    <details><summary>My bunker won't move. Is it stuck?</summary><p>It's dug in. The bunker never moves, not for a shell, not for a nuke. That's its whole personality. Use <b>Teleport</b> if you must relocate it.</p></details>
+    <details><summary>How do I remove the game?</summary><p>Delete the file. Nothing was installed. Its settings live in a small folder under your Windows user profile, and they're harmless to leave.</p></details>
+    <details><summary>Is it made with AI?</summary><p>Yes, and proudly: built by Chromatic Media with the help of AI (Claude) for the code, the art (every picture in the game is drawn by its own code) and the sound effects. Fonts are Black Ops One and Rajdhani under the SIL Open Font License, included with the game.</p></details>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div>
+    <p><b>Stygian Siege</b> · Designed by Tim Broussard.</p>
+    <p>Built in conversation with Legion (Claude, Anthropic), working under his direction. A <a href="https://chromaticmedia.us/">Chromatic Media</a> game.</p>
+    <p>Questions: <a href="mailto:support@chromaticmedia.us">support@chromaticmedia.us</a></p>
+  </div>
+  <div class="links">
+    <a href="https://github.com/chromatic-media/stygian-siege-downloads/releases/latest">Downloads on GitHub</a>
+    <a href="https://chromaticmedia.us/">More from the workshop</a>
+    <p>© 2026 Chromatic Media. All rights reserved.</p>
+  </div>
+</div></footer>
+
+<script>
+(function(){
+  // the wind sock: a new wind every few seconds, like a new turn
+  var read=document.getElementById('windread'), cone=document.getElementById('cone');
+  var words=[[1,'LIGHT'],[4,'BREEZY'],[7,'GUSTY'],[10,'HOWLING']];
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function blow(){
+    var s=Math.floor(Math.random()*13), dir=Math.random()<.5?-1:1, w='LIGHT';
+    for(var i=0;i<words.length;i++){ if(s>=words[i][0]) w=words[i][1]; }
+    read.textContent= s===0 ? 'CALM · 0' : (w+' · '+s+' '+(dir<0?'←':'→'));
+    cone.classList.toggle('flip', dir<0);
+    cone.style.opacity = s===0 ? .55 : 1;
+  }
+  blow(); if(!reduce) setInterval(blow, 4500);
+})();
+</script>
+</body>
+</html>
